@@ -10,8 +10,9 @@ var Path = require('path')
 //
 
 var jscount = 0, total = 0;
-if (false) Fs.find(process.env.HOME, {
+Fs.find(process.env.HOME, {
   //follow: true,
+  //serial: true,
   match_fn: function (path, stat, depth, cb) {
     //console.log(path)
     total++
@@ -35,6 +36,8 @@ if (false) Fs.find(process.env.HOME, {
     })
   })
 })
+
+/***
 
 //
 // mkdir_p ./HZ/foo./bar
@@ -76,3 +79,5 @@ Fs.ln_sf('/etc/passwd', 'ZH/foo./b ar', function (err) {
     Assert.ok(!Path.existsSync('HZ'))
   })
 })
+
+***/

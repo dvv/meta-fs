@@ -41,6 +41,7 @@ function find(path, options, callback) {
   options = options || {}
   var match_fn = options.match_fn || function (path, stat, depth, cb) { cb() }
   var dir_fn = options.dir_fn || function (path, stat, depth, cb) { cb() }
+  var serial = !!options.serial
 
   // cache highly used functions
   var normalize = Path.normalize
@@ -78,19 +79,34 @@ function find(path, options, callback) {
         // path is directory. read files
         readdir(path, function (err, files) {
           if (err) { cb(err) ; return }
-          // recursively iterate thru files
+          // recursively iterate over files
+          // cache `files` length
           var len = files.length
-          var i = 0
-          function walker() {
-            if (i >= len) {
+          // set starting index
+          // N.B. for serial execution iterations start by calling
+          // `collect`, hence it's called one time more,
+          // hence lesser starting index
+          var collected = serial ? 0 : 1
+          function collect() {
+            if (collected >= len) {
               // notify of directory is processed
               dir_fn(path, st, depth, cb)
-            } else {
-              walk(join(path, files[i]), depth + 1, walker)
-              i = i + 1
+            // if we iterate sequentially, start new iteration
+            } else if (serial) {
+              walk(join(path, files[collected]), depth + 1, collect)
+            }
+            collected++
+          }
+          // parallell execution and no files? fire callback
+          // sequential execution? start the first iteration
+          if (len === 0 || serial) {
+            collect()
+          // parallel execution? spawn concurrent walkers
+          } else {
+            for (var i = 0; i < len; i++) {
+              walk(join(path, files[i]), depth + 1, collect)
             }
           }
-          walker()
         })
       })
     })
