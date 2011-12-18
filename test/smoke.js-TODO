@@ -1,14 +1,11 @@
-#!/usr/bin/env node
-
-var Assert = require('assert')
-
-var Fs = require('./')
+var Fs = require('../')
 var Path = require('path')
+var Assert  = require('assert');
+var test    = require('vows').describe;
 
-/*
-//
-// find all .js files with system `find` and `Fs.find`
-//
+test('find').addBatch({
+  'is sane': {
+    'behaves like /bin/find': function () {
 
 var jscount = 0, total = 0;
 Fs.find(process.env.HOME, {
@@ -37,27 +34,7 @@ Fs.find(process.env.HOME, {
     })
   })
 })
-*/
 
-//
-// mkdir_p ./HZ/foo./bar
-//
-
-Fs.mkdir_p('HZ/foo./bar', '0771', function (err) {
-  if (err) {
-    console.log('mkdir_p ERROR', err)
-    process.exit(1)
+    },
   }
-  Assert.ok(!err)
-  Assert.ok(Path.existsSync('HZ'))
-  Fs.rm_rf('HZ', function (err) {
-    if (err) {
-      console.log('rm_fr ERROR', err)
-      process.exit(1)
-    }
-    Assert.ok(!err)
-    Assert.ok(!Path.existsSync('HZ/foo./bar'))
-    Assert.ok(!Path.existsSync('HZ/foo.'))
-    Assert.ok(!Path.existsSync('HZ'))
-  })
-})
+});
