@@ -71,7 +71,7 @@ function find(path, options, callback) {
         inos[inode] = true
       }
       // call matcher
-      match_fn(path, st, depth, function (err) {
+      match_fn.call(options, path, st, depth, function (err) {
         // `true` error means stop going deeper
         if (err && err !== true) { cb(err) ; return }
         // path is not directory? we re done.
@@ -90,7 +90,7 @@ function find(path, options, callback) {
           function collect() {
             if (collected >= len) {
               // notify of directory is processed
-              dir_fn(path, st, depth, cb)
+              dir_fn.call(options, path, st, depth, cb)
             // if we iterate sequentially, start new iteration
             } else if (serial) {
               walk(join(path, files[collected]), depth + 1, collect)
