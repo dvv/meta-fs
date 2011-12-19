@@ -1,40 +1,11 @@
 var Fs = require('../')
 var Path = require('path')
-var Assert  = require('assert');
-var test    = require('vows').describe;
+var Assert  = require('assert')
+var test = require('vows').describe
 
 test('find').addBatch({
   'is sane': {
     'behaves like /bin/find': function () {
-
-var jscount = 0, total = 0;
-Fs.find(process.env.HOME, {
-  //follow: true,
-  match_fn: function (path, stat, depth, cb) {
-    //console.log(path)
-    total++
-    if (path.match(/\.js$/)) {
-      jscount++
-    }
-    cb()
-  }
-}, function (err) {
-  if (err) {
-    console.log('ERR', err)
-    process.exit(1)
-  }
-  console.log('find()', jscount, 'of', total)
-  require('child_process').exec('find ' + process.env.HOME + ' | wc -l', function (err, findtotal) {
-    findtotal = Number((findtotal || '0').trim())
-    require('child_process').exec('find ' + process.env.HOME + ' -name \\*.js | wc -l', function (err, findjscount) {
-      findjscount = Number((findjscount || '0').trim())
-      console.log('find ~ -name \\*.js | wc -l', findjscount, 'of', findtotal)
-      Assert.equal(jscount, findjscount)
-      Assert.equal(total, findtotal)
-    })
-  })
-})
-
     },
   }
-});
+})
