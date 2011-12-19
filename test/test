@@ -1,4 +1,4 @@
-#!/home/dvv/.nvm/v0.6.1/bin/node
+#!/home/dvv/.nvm/v0.6.6/bin/node
 //#!/usr/bin/env node
 
 var assert = require('assert').ok
