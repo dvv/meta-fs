@@ -1,3 +1,8 @@
+Higher level filesystem utilities
+=====
+
+[![Build Status](https://secure.travis-ci.org/dvv/meta-fs.png)](http://travis-ci.org/dvv/meta-fs)
+
 Usage
 -----
 
