@@ -9,7 +9,7 @@ var Fs = require('../')
 // chroot to sandbox
 var Daemon = require('daemon')
 Daemon.chroot('../tmp')
-// and drop provileges
+// and drop privileges
 process.setgid(500)
 process.setuid(500)
 process.chdir('/home')
