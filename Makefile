@@ -4,6 +4,8 @@ PATH    := $(ROOT)/node_modules/.bin:$(PATH)
 PROJECT :=  $(notdir $(ROOT))
 
 test:
+	mkdir -p sandbox
+	tar -xzpf tests/mod.tgz -C sandbox
 	NODE_ENV=test vows tests/smoke.js --spec
 
 test_chroot: tmp/usr/bin/busybox
