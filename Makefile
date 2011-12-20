@@ -3,8 +3,10 @@ PATH    := $(ROOT)/node_modules/.bin:$(PATH)
 
 PROJECT :=  $(notdir $(ROOT))
 
-test: tmp/usr/bin/busybox
-	#NODE_ENV=test vows test/smoke.js --spec
+test:
+	NODE_ENV=test vows test/smoke.js --spec
+
+test_chroot: tmp/usr/bin/busybox
 	( cd test ; sudo ./test )
 
 tmp/usr/bin/busybox:
@@ -15,5 +17,5 @@ tmp/usr/bin/busybox:
 docs:
 	#ndoc
 
-.PHONY: test docs
+.PHONY: test test_chroot docs
 .SILENT:

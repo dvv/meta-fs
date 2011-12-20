@@ -36,16 +36,14 @@ function mkdir_p(path, perm, callback) {
  * mimick find
  */
 
-function match_stub_fn_async(path, stat, depth, cb) { cb() }
-function match_stub_fn_sync(path, stat, depth) { return true }
+function match_stub_fn(path, stat, depth, cb) { cb() }
 
 function find(path, options, callback) {
 
   // defaults
   options = options || {}
-  var sync_matcher = false //options.sync_matcher
-  var match_fn = options.match_fn || sync_matcher ? match_stub_fn_sync : match_stub_fn_async
-  var dir_fn = options.dir_fn || sync_matcher ? match_stub_fn_sync : match_stub_fn_async
+  var match_fn = options.match_fn || match_stub_fn
+  var dir_fn = options.dir_fn || match_stub_fn
   var serial = !!options.serial
 
   // cache highly used functions
