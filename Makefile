@@ -4,7 +4,7 @@ PATH    := $(ROOT)/node_modules/.bin:$(PATH)
 PROJECT :=  $(notdir $(ROOT))
 
 test:
-	NODE_ENV=test vows test/smoke.js --spec
+	NODE_ENV=test vows tests/smoke.js --spec
 
 test_chroot: tmp/usr/bin/busybox
 	( cd test ; sudo ./test )
