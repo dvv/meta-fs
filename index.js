@@ -158,8 +158,8 @@ function cp_a(src, dst, callback) {
   var join = Path.join
   var dirname = Path.dirname
   var basename = Path.basename
-  var read = Fs.read_file
-  var write = Fs.write_file
+  var read = Fs.readFile
+  var write = Fs.writeFile
   var readlink = Fs.readlink
   var symlink = Fs.symlink
   var chmod = Fs.chmod

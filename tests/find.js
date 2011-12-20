@@ -5,7 +5,8 @@ var ok  = require('assert').ok
 var equal  = require('assert').equal
 
 //suite('find').addBatch({
-require('vows').describe('find').addBatch({
+require('vows').describe('find')
+.addBatch({
   'is sane:': {
     topic: function () {
       var next = this.callback
@@ -34,15 +35,15 @@ require('vows').describe('find').addBatch({
         next(err, r)
       })
     },
-    'counts right all files in dependencies': function (err, result) {
+    'counts right all files': function (err, result) {
       ok(!err)
       equal(result.total, 27)
     },
-    'counts right all *.js files in dependencies': function (err, result) {
+    'counts right all *.js files': function (err, result) {
       ok(!err)
       equal(result.count, 11)
     },
-    'counts right all directories in dependencies': function (err, result) {
+    'counts right all directories': function (err, result) {
       ok(!err)
       equal(result.dirs, 9)
       equal(result.dirs_by_stat, 9)
@@ -51,4 +52,5 @@ require('vows').describe('find').addBatch({
       ok('TODO')
     },
   },
-}).export(module)
+})
+.export(module)
