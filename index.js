@@ -172,10 +172,11 @@ function cp_a(src, dst, callback) {
 
   // dots are special cases. E.g. cp_a . /foo should copy content of current directory
   // while cp_a ../foo /bar should copy file/directory ../foo as whole
-  var skip_len = dirname(src).length + 1
   if (src_orig == '.') {
-    skip_len = src.length + 1
+    skip += '/'
   }
+  //var skip_len = dirname(src).length + 1
+  var skip_len = src.length + 1
 
   // walk over the source
   find(src, {
@@ -183,8 +184,9 @@ function cp_a(src, dst, callback) {
     match_fn: function (path, stat, depth, cb) {
       // compose target path
       var new_path = join(dst, path.substring(skip_len))
-      //print('?'..path)
-      //print('!'..new_path)
+      //console.log('?' + path)
+      //console.log('!' + new_path)
+      //cb() ; return
       //p(path, stat)
       // helper to set target owner and mode to source's ones
       function set_perms(err) {

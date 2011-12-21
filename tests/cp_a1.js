@@ -11,17 +11,17 @@ require('vows').describe('cp_a')
     topic: function () {
       Fs.cp_a('sandbox/MOD', 'sandbox/MOD1', this.callback)
     },
-    'creates directory MOD1': function (err) {
+    'creates directory MOD1/MOD': function (err) {
       ok(!err)
-      ok(Fs.statSync('sandbox/MOD1').isDirectory())
+      ok(Fs.statSync('sandbox/MOD1/MOD').isDirectory())
     },
-    'creates file MOD1/N/n.lua': function (err) {
+    'creates file MOD1/MOD/N/n.lua': function (err) {
       ok(!err)
-      ok(Fs.statSync('sandbox/MOD1/N/n.lua').isFile())
+      ok(Fs.statSync('sandbox/MOD1/MOD/N/n.lua').isFile())
     },
-    'creates symlink MOD1/N/modules': function (err) {
+    'creates symlink MOD1/MOD/N/modules': function (err) {
       ok(!err)
-      ok(Fs.lstatSync('sandbox/MOD1/N/modules').isSymbolicLink())
+      ok(Fs.lstatSync('sandbox/MOD1/MOD/N/modules').isSymbolicLink())
     },
     'counters:': {
       topic: function () {
@@ -53,10 +53,10 @@ require('vows').describe('cp_a')
       },
       ' are doubled': function (err, result) {
         ok(!err)
-        equal(result.total, 53)
+        equal(result.total, 54)
         equal(result.count, 22)
-        equal(result.dirs, 17)
-        equal(result.dirs_by_stat, 17)
+        equal(result.dirs, 18)
+        equal(result.dirs_by_stat, 18)
       },
     },
   },
