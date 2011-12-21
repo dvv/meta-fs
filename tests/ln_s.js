@@ -20,6 +20,15 @@ require('vows').describe('ln_s')
       var p = Fs.readFileSync('sandbox/p', 'utf8')
       ok(p.match(/^root:/))
     },
+    'errors if destination exists:': {
+      topic: function () {
+        Fs.ln_s('/etc/passwd', 'sandbox/p', this.callback)
+      },
+      'symlinks /etc/passwd': function (err, result) {
+        ok(err)
+        equal(err.code, 'EEXIST')
+      },
+    },
   },
 })
 .export(module)
