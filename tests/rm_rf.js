@@ -1,19 +1,27 @@
 var Fs = require('../')
 var Path = require('path')
-//var suite = require('vows').describe
 var ok  = require('assert').ok
 var equal  = require('assert').equal
 
-//suite('rm_rf').addBatch({
 require('vows').describe('rm_rf')
 .addBatch({
-  'rm -rf sandbox:': {
+  'rm -rf sandbox/foo/bar:': {
     topic: function () {
-      Fs.rm_rf('sandbox', this.callback)
+      Fs.rm_rf('sandbox/foo/bar', this.callback)
     },
-    'purges sandbox': function (err) {
+    'purges part of sandbox': function (err) {
       ok(!err)
-      ok(!Path.existsSync('sandbox'))
+      ok(!Path.existsSync('sandbox/foo/bar'))
+      ok(Path.existsSync('sandbox/foo/link'))
+    },
+    'rm -rf sandbox:': {
+      topic: function () {
+        Fs.rm_rf('sandbox', this.callback)
+      },
+      'purges sandbox': function (err) {
+        ok(!err)
+        ok(!Path.existsSync('sandbox'))
+      },
     },
   },
 })

@@ -1,27 +1,29 @@
 var Fs = require('../')
 var Path = require('path')
-//var suite = require('vows').describe
 var ok  = require('assert').ok
 var equal  = require('assert').equal
 
-//suite('find').addBatch({
 require('vows').describe('cp_a')
 .addBatch({
-  'cp -a MOD MOD1:': {
+  'copyying foo to fuu:': {
     topic: function () {
-      Fs.cp_a('sandbox/MOD', 'sandbox/MOD1', this.callback)
+      Fs.cp_a('sandbox/foo', 'sandbox/fuu', this.callback)
     },
-    'creates directory MOD1': function (err) {
+    'creates directory fuu': function (err) {
       ok(!err)
-      ok(Fs.statSync('sandbox/MOD1').isDirectory())
+      ok(Fs.statSync('sandbox/fuu').isDirectory())
     },
-    'creates file MOD1/N/n.lua': function (err) {
+    'creates file fuu/bar/baz/file': function (err) {
       ok(!err)
-      ok(Fs.statSync('sandbox/MOD1/N/n.lua').isFile())
+      ok(Fs.statSync('sandbox/fuu/bar/baz/file').isFile())
     },
-    'creates symlink MOD1/N/modules': function (err) {
+    'creates symlink fuu/bar/baz/link': function (err) {
       ok(!err)
-      ok(Fs.lstatSync('sandbox/MOD1/N/modules').isSymbolicLink())
+      ok(Fs.lstatSync('sandbox/fuu/bar/baz/link').isSymbolicLink())
+    },
+    'creates symlink fuu/bar/baz/link pointing to directory': function (err) {
+      ok(!err)
+      ok(Fs.statSync('sandbox/fuu/bar/baz/link').isDirectory())
     },
     'counters:': {
       topic: function () {
@@ -30,16 +32,16 @@ require('vows').describe('cp_a')
           total: 0,
           count: 0,
           dirs: 0,
-          dirs_by_stat: 0,
+          syms: 0,
         }
         Fs.find('sandbox', {
           match_fn: function (path, stat, depth, cb) {
             r.total++
-            if (path.match(/\.lua$/)) {
+            if (path.match(/le/)) {
               r.count++
             }
-            if (stat.isDirectory()) {
-              r.dirs_by_stat++
+            if (stat.isSymbolicLink()) {
+              r.syms++
             }
             cb()
           },
@@ -53,10 +55,10 @@ require('vows').describe('cp_a')
       },
       ' are doubled': function (err, result) {
         ok(!err)
-        equal(result.total, 53)
-        equal(result.count, 22)
-        equal(result.dirs, 17)
-        equal(result.dirs_by_stat, 17)
+        equal(result.total, 21)
+        equal(result.count, 7)
+        equal(result.dirs, 7)
+        equal(result.syms, 7)
       },
     },
   },

@@ -1,10 +1,8 @@
 var Fs = require('../')
 var Path = require('path')
-//var suite = require('vows').describe
 var ok  = require('assert').ok
 var equal  = require('assert').equal
 
-//suite('find').addBatch({
 require('vows').describe('find')
 .addBatch({
   'is sane:': {
@@ -14,16 +12,16 @@ require('vows').describe('find')
         total: 0,
         count: 0,
         dirs: 0,
-        dirs_by_stat: 0,
+        syms: 0,
       }
       Fs.find('sandbox', {
         match_fn: function (path, stat, depth, cb) {
           r.total++
-          if (path.match(/\.lua$/)) {
+          if (path.match(/il/)) {
             r.count++
           }
-          if (stat.isDirectory()) {
-            r.dirs_by_stat++
+          if (stat.isSymbolicLink()) {
+            r.syms++
           }
           cb()
         },
@@ -37,16 +35,19 @@ require('vows').describe('find')
     },
     'counts right all files': function (err, result) {
       ok(!err)
-      equal(result.total, 27)
+      equal(result.total, 12)
     },
     'counts right all *.js files': function (err, result) {
       ok(!err)
-      equal(result.count, 11)
+      equal(result.count, 4)
     },
     'counts right all directories': function (err, result) {
       ok(!err)
-      equal(result.dirs, 9)
-      equal(result.dirs_by_stat, 9)
+      equal(result.dirs, 4)
+    },
+    'counts right all symlinks': function (err, result) {
+      ok(!err)
+      equal(result.syms, 4)
     },
     'behaves like /bin/find': function (err, total) {
       ok('TODO')

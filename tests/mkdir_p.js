@@ -1,10 +1,8 @@
 var Fs = require('../')
 var Path = require('path')
-//var suite = require('vows').describe
 var ok  = require('assert').ok
 var equal  = require('assert').equal
 
-//suite('mkdir_p').addBatch({
 require('vows').describe('mkdir_p')
 .addBatch({
   'works:': {
