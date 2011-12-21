@@ -34,7 +34,7 @@ Usage
 
 
     // make symlink
-    Fs.ln_sf('/etc/passwd', '/tmp/passes', console.log)
+    Fs.ln_s('/etc/passwd', '/tmp/passes', console.log)
 
 
 License
