@@ -40,4 +40,4 @@ Usage
 License
 -------
 
-[MIT](license.txt).
+[MIT](meta-fs/license.txt)
