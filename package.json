@@ -2,15 +2,14 @@
     "name": "meta-fs"
   , "version": "0.0.1"
   , "description": "Higher level utilities for filesystem"
-  , "keywords": ["file", "async", "mkdir", "walk", "find"]
+  , "keywords": ["file", "async", "mkdir", "walk", "find", "copy", "tree"]
   , "author": "Vladimir Dronnikov <dronnikov@gmail.com>"
   , "contributors": [
     ]
   , "dependencies": {
     }
   , "devDependencies": {
-      "vows": "",
-      "daemon": ""
+      "vows": ""
     }
   , "repository": "https://github.com/dvv/meta-fs"
   , "licenses": [{
