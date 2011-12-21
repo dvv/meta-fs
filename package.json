@@ -12,10 +12,7 @@
       "vows": "",
       "daemon": ""
     }
-  , "repositories": [{
-      "type": "git",
-      "url" : "https://github.com/dvv/meta-fs.git"
-    }]
+  , "repository": "https://github.com/dvv/meta-fs"
   , "licenses": [{
       "type" : "MIT",
       "url" : "https://github.com/dvv/meta-fs/raw/master/license.txt"
