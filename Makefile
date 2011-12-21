@@ -11,7 +11,7 @@ test:
 	ln -s ../.. sandbox/foo/bar/link
 	ln -s .. sandbox/foo/link
 	ln -s . sandbox/link
-	NODE_ENV=test vows tests/find.js tests/cp_a.js tests/mkdir_p.js tests/ln_s.js tests/rm_rf.js --spec
+	NODE_ENV=test vows tests/find.js tests/copy.js tests/mkdir.js tests/link.js tests/remove.js --spec
 
 docs:
 	#ndoc
