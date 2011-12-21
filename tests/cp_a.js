@@ -21,7 +21,7 @@ require('vows').describe('cp_a')
     },
     'creates symlink MOD1/MOD/N/modules': function (err) {
       ok(!err)
-      equal(Fs.statSync('sandbox/MOD1/MOD/N/modules').nlink, 2)
+      ok(Fs.lstatSync('sandbox/MOD1/MOD/N/modules').isSymbolicLink())
     },
     'counters:': {
       topic: function () {

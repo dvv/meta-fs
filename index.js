@@ -226,17 +226,13 @@ function cp_a(src, dst, callback) {
 }
 
 /*
- * mimick ln -sf
+ * mimick ln -s
  */
-function ln_sf(target, path, callback) {
+function ln_s(target, path, callback) {
   path = Path.resolve(process.cwd(), path)
   mkdir_p(Path.dirname(path), '0755', function (err) {
     if (err) { callback(err) ; return }
-    // FIXME: should we mimick -f // rm_rf basename(path) before this?
-    rm_rf(path, function (err) {
-      if (err) { callback(err) ; return }
-      Fs.symlink(target, path, callback)
-    })
+    Fs.symlink(target, path, callback)
   })
 }
 
@@ -245,6 +241,6 @@ Fs.mkdir_p = mkdir_p
 Fs.find = find
 Fs.rm_rf = rm_rf
 Fs.cp_a = cp_a
-Fs.ln_sf = ln_sf
+Fs.ln_s = ln_s
 
 module.exports = Fs
