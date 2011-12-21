@@ -37,7 +37,7 @@ require('vows').describe('copy')
         Fs.find('sandbox', {
           match_fn: function (path, stat, depth, cb) {
             r.total++
-            if (path.match(/le/)) {
+            if (path.match(/ile$/)) {
               r.count++
             }
             if (stat.isSymbolicLink()) {

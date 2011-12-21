@@ -17,7 +17,7 @@ require('vows').describe('find')
       Fs.find('sandbox', {
         match_fn: function (path, stat, depth, cb) {
           r.total++
-          if (path.match(/il/)) {
+          if (path.match(/ile$/)) {
             r.count++
           }
           if (stat.isSymbolicLink()) {
