@@ -7,7 +7,7 @@ test:
 	-rm -fr sandbox
 	mkdir -p sandbox
 	tar -xzpf tests/mod.tgz -C sandbox
-	NODE_ENV=test vows tests/find.js tests/cp_a.js --spec
+	NODE_ENV=test vows tests/find.js tests/cp_a.js tests/mkdir_p.js --spec
 
 test_chroot: tmp/usr/bin/busybox
 	( cd test ; sudo ./test )
