@@ -3,11 +3,11 @@ var Path = require('path')
 var ok  = require('assert').ok
 var equal  = require('assert').equal
 
-require('vows').describe('ln_s')
+require('vows').describe('link')
 .addBatch({
   'works:': {
     topic: function () {
-      Fs.ln_s('/etc/passwd', 'sandbox/p', this.callback)
+      Fs.link('/etc/passwd', 'sandbox/p', this.callback)
     },
     'symlinks /etc/passwd': function (err, result) {
       ok(!err)
@@ -20,7 +20,7 @@ require('vows').describe('ln_s')
     },
     'errors if destination exists:': {
       topic: function () {
-        Fs.ln_s('/etc/passwd', 'sandbox/p', this.callback)
+        Fs.link('/etc/passwd', 'sandbox/p', this.callback)
       },
       'symlinks /etc/passwd': function (err, result) {
         ok(err)

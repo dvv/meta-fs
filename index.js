@@ -123,7 +123,7 @@ function find(path, options, callback) {
 /*
  * mimick rm -fr
  */
-function rm_rf(path, callback) {
+function remove(path, callback) {
 
   // cache highly used functions
   var unlink = Fs.unlink
@@ -152,7 +152,7 @@ function rm_rf(path, callback) {
 /*
  * mimick cp -a
  */
-function cp_a(src, dst, callback) {
+function copy(src, dst, callback) {
 
   // cache highly used functions
   var join = Path.join
@@ -170,8 +170,8 @@ function cp_a(src, dst, callback) {
   src = Path.resolve(process.cwd(), src)
   dst = Path.resolve(process.cwd(), dst)
 
-  // dots are special cases. E.g. cp_a . /foo should copy content of current directory
-  // while cp_a ../foo /bar should copy file/directory ../foo as whole
+  // dots are special cases. E.g. copy . /foo should copy content of current directory
+  // while copy ../foo /bar should copy file/directory ../foo as whole
   if (src_orig == '.') {
     skip += '/'
   }
@@ -230,7 +230,7 @@ function cp_a(src, dst, callback) {
 /*
  * mimick ln -s
  */
-function ln_s(target, path, callback) {
+function link(target, path, callback) {
   path = Path.resolve(process.cwd(), path)
   mkdir_p(Path.dirname(path), '0755', function (err) {
     if (err) { callback(err) ; return }
@@ -241,8 +241,8 @@ function ln_s(target, path, callback) {
 // export augmented Fs
 Fs.mkdir_p = mkdir_p
 Fs.find = find
-Fs.rm_rf = rm_rf
-Fs.cp_a = cp_a
-Fs.ln_s = ln_s
+Fs.remove = remove
+Fs.copy = copy
+Fs.link = link
 
 module.exports = Fs

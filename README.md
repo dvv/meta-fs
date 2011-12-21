@@ -22,7 +22,7 @@ Usage
 
 
     // remove /home/foo completely
-    Fs.rm_rf('/home/foo', console.log)
+    Fs.remove('/home/foo', console.log)
 
 
     // make nested directories
@@ -30,14 +30,14 @@ Usage
 
 
     // copy source file/directory
-    Fs.cp_a('/home/foo/bar/baz', '/tmp/wow', console.log)
+    Fs.copy('/home/foo/bar/baz', '/tmp/wow', console.log)
 
 
     // make symlink
-    Fs.ln_s('/etc/passwd', '/tmp/passes', console.log)
+    Fs.link('/etc/passwd', '/tmp/passes', console.log)
 
 
 License
 -------
 
-Check [here](license.txt).
+[MIT](license.txt).

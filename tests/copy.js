@@ -3,11 +3,11 @@ var Path = require('path')
 var ok  = require('assert').ok
 var equal  = require('assert').equal
 
-require('vows').describe('cp_a')
+require('vows').describe('copy')
 .addBatch({
   'copyying foo to fuu:': {
     topic: function () {
-      Fs.cp_a('sandbox/foo', 'sandbox/fuu', this.callback)
+      Fs.copy('sandbox/foo', 'sandbox/fuu', this.callback)
     },
     'creates directory fuu': function (err) {
       ok(!err)
